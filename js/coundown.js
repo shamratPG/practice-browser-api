@@ -1,13 +1,13 @@
-console.log('cowndown')
-
-// I want to get a number first.
-
 const initalNumber = 0;
 
 const initialValue = () => {
-    const value = prompt('You want to start coundown from', 0);
-    setValue(value);
-    return value;
+    let value = parseInt(prompt('You want to start coundown from', 0));
+    if (!isNaN(value)) {
+        setValue(value);
+        return value;
+    } else {
+        initialValue();
+    }
 }
 
 const setValue = value => {
@@ -15,9 +15,13 @@ const setValue = value => {
 }
 
 const startCoundown = () => {
-    const number = parseInt(initialValue());
-    // console.log(number)
-    for (let i = number; i >= 0; i--) {
+    let i = parseInt(initialValue());
+    const coundown = setInterval(() => {
+        setValue(--i);
         console.log(i);
-    }
+        if (i === 0) {
+            clearInterval(coundown);
+        }
+    }, 1000)
 }
+
